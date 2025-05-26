@@ -1,0 +1,21 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col-md-4 {
+  display: flex;
+  flex-direction: column;
+}
+
+.card {
+  flex: 1 1 auto; /* que la card ocupe toda la altura disponible */
+  display: flex;
+  flex-direction: column;
+}
+
+.card-body {
+  flex: 1 1 auto; /* que el cuerpo de la card crezca y ocupe toda la altura */
+  display: flex;
+  flex-direction: column;
+}

@@ -7,10 +7,9 @@ import { TestComponent } from './components/test/test.component';
 
 export const routes: Routes = [
   { path: '', component: LoginComponent }, // Redirige raíz a login
+  { path: 'login', component: LoginComponent },
   { path: 'panel', component: PanelComponent },
-  { path: 'test', component: TestComponent },
   { path: 'transfers', component: TransfersComponent },
- // { path: '**', redirectTo: 'login' }, // rutas desconocidas → login
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

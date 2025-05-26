@@ -42,6 +42,11 @@ export class TransferService {
     return this.http.get<any>(`${this.apiUrl}/transfer/my-transfers`, { params });
   }
 
+  getTransfersTop(idUser: number): Observable<Respuesta<TransferDto[]>> {
+    const params = new HttpParams().set('idUser', idUser.toString());
+    return this.http.get<any>(`${this.apiUrl}/transfer/my-transfers-top`, { params });
+  }
+
   getGraphTransfers(idAccount: number): Observable<Respuesta<GraphTransfers>> {
     const params = new HttpParams().set('idAccount', idAccount.toString());
     return this.http.get<any>(`${this.apiUrl}/transfer/grafic-transfers`, { params });

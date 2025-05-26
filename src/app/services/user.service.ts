@@ -11,6 +11,12 @@ interface Usuario {
   erased: boolean;
 }
 
+interface SaveUsuario {
+  user: string;
+  email: string;
+  password: string;
+}
+
 interface Respuesta {
   Mensaje: string;
   Datos: Usuario;
@@ -30,6 +36,10 @@ export class UserService {
       .set('username', username)
       .set('password', password);
      return this.http.get<Respuesta>(`${this.apiUrl}/user/valid`, { params });
+  }
+
+  saveUsuario(user : SaveUsuario): Observable<any> {
+    return this.http.post<Respuesta>(`${this.apiUrl}/user/save`, user);
   }
 
 }

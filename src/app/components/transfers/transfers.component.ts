@@ -11,6 +11,7 @@ import { FormsModule } from '@angular/forms';
 import { ContactService, MyContact } from '../../services/contact.service';
 import { AccountService } from '../../services/account.service';
 import { AlertService } from '../../services/alert.service';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-transfers',
@@ -18,7 +19,8 @@ import { AlertService } from '../../services/alert.service';
     NgChartsModule,
     CommonModule,
     FormsModule,
-    NgSelectModule
+    NgSelectModule,
+    RouterModule
   ],
   templateUrl: './transfers.component.html',
   styleUrl: './transfers.component.css'
@@ -44,7 +46,7 @@ export class TransfersComponent implements OnInit{
   public pieChartPlugins = [];
 
   constructor(private transferService: TransferService, private contactService: ContactService,
-    private accountService : AccountService, private alertService: AlertService
+    private accountService : AccountService, private alertService: AlertService,private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -60,6 +62,12 @@ export class TransfersComponent implements OnInit{
    this.cantidad = 0;
    this.balance = 0;
   }
+
+  logout(): void {
+  localStorage.removeItem('idUser');
+  localStorage.removeItem('username');
+  this.router.navigate(['/login']);
+}
 
   openAccountNumberModal(): void {
   Swal.fire({
@@ -219,7 +227,7 @@ loadContacts(): void {
 
         setTimeout(() => {
         window.location.reload();
-        }, 4000);
+        }, 2000);
 
       },
       error: (error) => {

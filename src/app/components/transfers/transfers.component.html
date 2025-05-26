@@ -3,24 +3,29 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" routerLink="/transfers">Navbar</a>
+    <a class="navbar-brand" routerLink="/transfers">Redsinergia</a>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
+
+
+<li class="nav-item">
+  <a class="nav-link"
+     routerLink="/panel"
+     routerLinkActive="active"
+     aria-current="page"
+    [routerLinkActiveOptions]="{ exact: true }">
+     Home
+  </a>
+</li>
+
+<li class="nav-item">
           <a class="nav-link active" aria-current="page" routerLink="/transfers">Transfers</a>
-        </li>
+</li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Cerrar sessión</a>
+          <a class="nav-link"  href="#" (click)="logout()">Cerrar sessión</a>
         </li>
 
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
     </div>
   </div>
 </nav>
@@ -31,8 +36,8 @@
   <h1>Panel Tranferencia</h1>
   </div>
     <div class="text-start">
-       <button (click)="openAccountNumberModal()" type="button" class="btn btn-success me-3">+Contacto</button>
-       <button (click)="createAccountModal()" type="button" class="btn btn-success">+Cuenta</button>
+       <button (click)="createAccountModal()" type="button" class="btn btn-success me-3">+Cuenta</button>
+       <button (click)="openAccountNumberModal()" type="button" class="btn btn-success">+Contacto</button>
     </div>
 
     <br>
@@ -65,7 +70,7 @@
 
  <div class="mb-3">
   <div class="form-group">
-  <label class="form-label fw-bold" for="contact">Seleccione un número de cuenta:</label>
+  <label class="form-label fw-bold" for="contact">Seleccione cuenta de destino:</label>
   <select
     class="form-control"
     id="contact"
@@ -98,9 +103,9 @@
   <div class="col text-center">
 
      <div class="container text-center">
-        <label class="form-label fw-bold">
+        <label style="font-size: 1.5rem;" class="form-label fw-bold">
   Cuenta
-  <span *ngIf="selectMyAccount">&nbsp;{{ selectMyAccount.numberAccount }}</span>
+  <span style="font-size: 1.5rem;" *ngIf="selectMyAccount">&nbsp;{{ selectMyAccount.numberAccount }}</span>
 </label>
   <canvas baseChart
   [type]="'pie'"
@@ -148,7 +153,7 @@
         <td>{{ transfer.count }}</td>
         <td>{{ transfer.origin }}</td>
         <td>{{ transfer.destination }}</td>
-        <td>{{'$ '+ transfer.amount }}</td>
+        <td>{{ transfer.amount | currency:'MXN' }}</td>
         <td>{{ transfer.date_format }}</td>
       </tr>
     </tbody>

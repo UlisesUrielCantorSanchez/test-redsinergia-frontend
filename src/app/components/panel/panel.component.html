@@ -3,52 +3,118 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
+    <a class="navbar-brand" routerLink="/transfers">Redsinergia</a>
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
-        <li class="nav-item">
+<li class="nav-item">
   <a class="nav-link"
-     routerLink="/transfers"
+     routerLink="/panel"
      routerLinkActive="active"
-     [routerLinkActiveOptions]="{ exact: true }"
-     aria-current="page">
-     Transfers
+     aria-current="page"
+    [routerLinkActiveOptions]="{ exact: true }">
+     Home
   </a>
 </li>
 
-
-
-
- <li class="nav-item">
-  <a class="nav-link"
-     routerLink="/test"
-     routerLinkActive="active"
-     [routerLinkActiveOptions]="{ exact: true }"
-     aria-current="page">
-     Test
-  </a>
+<li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/transfers">Transfers</a>
 </li>
-
-
         <li class="nav-item">
-          <a class="nav-link" href="#" (click)="logout($event)" >Cerrar sessión</a>
+          <a class="nav-link"  href="#" (click)="logout()">Cerrar sessión</a>
         </li>
 
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
     </div>
   </div>
 </nav>
 
 
 <div class="container">
-  <h1>Bienvenido al Panel Principal</h1>
-  <p>¡Acceso concedido!</p>
-  <button class="btn btn-primary">Botón Bootstrap</button>
+  <h1>Bienvenido {{ username }}</h1>
+ <br>
+  <div class="container">
+  <div class="row">
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <label for="myAccount" class="form-label fw-bold">Seleccione un número de cuenta:</label>
+  <select
+    class="form-control"
+    id="myAccount"
+    [(ngModel)]="selectMyAccount"
+    name="myAccount"
+    (mousedown)="onOpen($event)"
+    (change)="loadGraph(selectMyAccount?.idAccount ?? 0);
+              loadTransfers()"
+     >
+    <option value="" disabled selected>-- Seleccione --</option>
+    <option *ngFor="let account of myAccounts" [ngValue]="account">{{ account.numberAccount }}</option>
+  </select>
+
+    <canvas baseChart
+  [type]="'pie'"
+  [datasets]="pieChartDatasets"
+  [labels]="pieChartLabels"
+  [options]="pieChartOptions"
+  [plugins]="pieChartPlugins"
+  [legend]="pieChartLegend">
+  </canvas>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Special title treatment 2</h5>
+
+          <img
+  class="img-thumbnail"
+  src="https://www.unotv.com/uploads/2023/03/familiar-banco-fallecido-153448.jpg"
+  alt="Imagen familiar banco fallecido">
+
+          <p class="card-text">
+            Una transferencia bancaria es una operación financiera que consiste en el envío de dinero de una cuenta bancaria a otra. Esta operación puede realizarse entre cuentas de la misma entidad bancaria o entre cuentas de diferentes entidades.
+
+            Las transferencias bancarias sirven para diversos propósitos y desempeñan un papel esencial en la gestión financiera de individuos y empresas.
+          </p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Gastos principales</h5>
+
+          <div class="table-responsive mt-3">
+  <table class="table table-striped table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th>#</th>
+        <th>Origen</th>
+        <th>Monto</th>
+        <th>Fecha</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr *ngFor="let transfer of transfersTable">
+        <td>{{ transfer.count }}</td>
+        <td>{{ transfer.origin }}</td>
+        <td>{{ transfer.amount | currency:'MXN' }}</td>
+        <td>{{ transfer.date_format }}</td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 </div>
 
